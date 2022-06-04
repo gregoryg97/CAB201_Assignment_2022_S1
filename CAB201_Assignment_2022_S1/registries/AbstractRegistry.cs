@@ -9,6 +9,14 @@ namespace CAB201_Assignment_2022_S1
     abstract class Registry<T>
     {
         protected List<T> _registryStore;
+        
+        public List<T> getAll()
+        {
+            List<T> list = new List<T>();
+            list.AddRange(_registryStore);
+            return list;
+        }
+
         public virtual bool add(T value)
         {
             if (exists(value))

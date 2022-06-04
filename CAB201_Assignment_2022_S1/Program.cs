@@ -11,55 +11,7 @@ namespace CAB201_Assignment_2022_S1
     internal class Program
     {
 
-        static Person promptPersonCreation()
-        {
-            string name = "";
-            while (name.Length <= 0)
-            {
-                name = UserInterface.GetInput("Full name");
-            }
-
-            string email = "";
-            while (email.Length <= 0 || !Utils.isValidEmailAddress(email))
-            {
-                email = UserInterface.GetInput("Email address");
-                email = email.Trim();
-            }
-
-            return new Person(name, email);
-        }
-        static Employee promptEmployeeCreation()
-        {
-            Person person = promptPersonCreation();
-
-            string password = "";
-            while (password.Length <= 0)
-            {
-                password = UserInterface.GetPassword("Password");
-            }
-
-            return new Employee(person, password);
-        }
-
-        static Tuple<string, string> promptEmployeeLogin()
-        {
-            string email = "";
-            while (email.Length <= 0 || !Utils.isValidEmailAddress(email))
-            {
-                email = UserInterface.GetInput("Email address");
-                email = email.Trim();
-            }
-
-            string password = "";
-            while (password.Length <= 0)
-            {
-                password = UserInterface.GetPassword("Password");
-            }
-
-            return Tuple.Create(email, password);
-        }
-
-        static Customer promptCustomerCreation()
+        /*static Customer promptCustomerCreation()
         {
             Person person = promptPersonCreation();
 
@@ -77,9 +29,9 @@ namespace CAB201_Assignment_2022_S1
             }
 
             return new Customer(person, address, mobile);
-        }
+        }*/
 
-        static void Main(string[] args)
+       /* static void Main(string[] args)
         {
             Menu program = new HomeMenu("");
             program.Display();
@@ -89,7 +41,7 @@ namespace CAB201_Assignment_2022_S1
 
             int option = -1;
 
-            while (option != 2)
+            /*while (option != 2)
             {
                 option = UserInterface.GetOption("Please select one of the following:",
                 "Register as a new Employee", "Login as existing Employee", "Exit");
@@ -124,6 +76,6 @@ namespace CAB201_Assignment_2022_S1
             }
 
             Console.WriteLine(option);
-        }
+        }*/
     }
 }
