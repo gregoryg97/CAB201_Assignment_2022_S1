@@ -81,6 +81,9 @@ namespace CAB201_Assignment_2022_S1
 
         static void Main(string[] args)
         {
+            Menu program = new HomeMenu("");
+            program.Display();
+
             EmployeeRegistry employeeRegistry = new EmployeeRegistry();
             CustomerRegistry customerRegistry = new CustomerRegistry();
 
