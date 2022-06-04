@@ -18,11 +18,20 @@ namespace CAB201_Assignment_2022_S1
             MenuItem registerLightAircraft = new CallableItem("Register new light aircraft", RegisterLightAircraft);
             Add(registerLightAircraft);
 
+            MenuItem registerHelicopter = new CallableItem("Register new helicopter", RegisterHelicopter);
+            Add(registerHelicopter);
+
             MenuItem getExistingServices = new CallableItem("View existing flying services", ViewFlyingServices);
             Add(getExistingServices);
 
             MenuItem getFlyingTimes = new CallableItem("View existing times", ViewFlyingTimes);
             Add(getFlyingTimes);
+
+            MenuItem addCustomerToService = new CallableItem("Add customer to flying service", AddCustomerToService);
+            Add(addCustomerToService);
+
+            MenuItem getFlightPassangers = new CallableItem("View flight passangers", ViewFlightPassangers);
+            Add(getFlightPassangers);
 
             MenuItem logout = new CallableItem("Logout", Logout);
             Add(logout);
@@ -32,6 +41,85 @@ namespace CAB201_Assignment_2022_S1
         {
             // TODO put text here and remove active employee from registry
             return -1;
+        }
+
+        private int ViewFlightPassangers()
+        {
+            List<BaseAircraft> services = Airline.FIGHT_REGISTRY.getAll();
+            if (services.Count <= 0)
+            {
+                UserInterface.Message("No services to add a customer to");
+                return 0;
+            }
+
+            List<String> servicesStr = new List<String>();
+            foreach (BaseAircraft service in services)
+            {
+                servicesStr.Add(String.Format("{0} - {1} to {2} @ {3}", service.getCraftType(), service.getDepaturePlace(),
+                    service.getArrivalPlace(), service.getDepatureTime()));
+            }
+
+            int selectedService = UserInterface.GetOption("Select Service:", servicesStr.ToArray());
+
+            if (services[selectedService].getPassangerCount() <= 0)
+            {
+                UserInterface.Message("Service has no passangers");
+                return 0;
+            }
+
+            List<Customer> passangers = services[selectedService].getPassangerList();
+            foreach (Customer passanger in passangers)
+            {
+                Console.WriteLine(passanger.getName());
+            }
+
+            return 0;
+        }
+
+        private int AddCustomerToService()
+        {
+            List<Customer> customerList = Airline.CUSTOMER_REGISTRY.getAll();
+            List<BaseAircraft> services = Airline.FIGHT_REGISTRY.getAll();
+
+            if (customerList.Count <= 0)
+            {
+                UserInterface.Message("No customers to add to services");
+                return 0;
+            }
+
+            if (services.Count <= 0)
+            {
+                UserInterface.Message("No services to add a customer to");
+                return 0;
+            }
+
+            List<String> customerStrs = new List<String>();
+            foreach (Customer customer in customerList)
+            {
+                customerStrs.Add(String.Format("{0}", customer.getName()));
+            }
+
+            int selectedCustomer = UserInterface.GetOption("Select Customer:", customerStrs.ToArray());
+
+            List<String> servicesStr = new List<String>();
+            foreach (BaseAircraft service in services)
+            {
+                servicesStr.Add(String.Format("{0} - {1} to {2} @ {3}", service.getCraftType(), service.getDepaturePlace(), 
+                    service.getArrivalPlace(), service.getDepatureTime()));
+            }
+
+            int selectedService = UserInterface.GetOption("Select Service:", servicesStr.ToArray());
+
+            if (!Airline.FIGHT_REGISTRY.addPassangerToFlight(customerList[selectedCustomer], selectedService))
+            {
+                UserInterface.Message("Passanger failed to be added to service. Please ensure passanger is not booked already.");
+            } else
+            {
+                UserInterface.Message(String.Format("Customer {0} added to service. Total cost: ${1}",
+                    customerList[selectedCustomer].getName(), services[selectedService].getPassangerCost(1)));
+            }
+
+            return 0;
         }
 
         private int ViewFlyingTimes()
@@ -70,6 +158,10 @@ namespace CAB201_Assignment_2022_S1
             return 0;
         }
 
+        private int RegisterHelicopter()
+        {
+            return 0;
+        }
         private int RegisterLightAircraft()
         {
             string depaturePlace = "";

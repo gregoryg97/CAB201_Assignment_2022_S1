@@ -34,5 +34,27 @@ namespace CAB201_Assignment_2022_S1
         {
             throw new NotImplementedException();
         }
+
+        public bool addPassangerToFlight(Customer passanger, int serviceIdx)
+        {
+            if (serviceIdx < 0 || serviceIdx >= this._registryStore.Count())
+            {
+                return false;
+            }
+
+            BaseAircraft flight = this._registryStore[serviceIdx];
+
+            Person searchResult = flight.getPassangerList().Find(delegate (Customer person)
+            {
+                return person.getName().Equals(passanger.getName());
+            });
+
+            if (searchResult != null)
+            {
+                return false;
+            }
+
+            return this._registryStore[serviceIdx].addPassanger(passanger);
+        }
     }
 }

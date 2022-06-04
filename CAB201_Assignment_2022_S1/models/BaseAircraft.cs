@@ -13,7 +13,7 @@ namespace CAB201_Assignment_2022_S1
         private string ArrivalPlace;
         private string DepatureTime;
         private int Distance;
-        private List<Customer> Passangers;
+        private List<Customer> Passangers = new List<Customer>();
 
         public BaseAircraft(string depaturePlace, string arrivalPlace, string depatureTime, int distance)
         {
