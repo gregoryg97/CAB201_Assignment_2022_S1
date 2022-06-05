@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CAB201_Assignment_2022_S1
 {
@@ -110,9 +107,16 @@ namespace CAB201_Assignment_2022_S1
 
             int selectedService = UserInterface.GetOption("Select Service:", servicesStr.ToArray());
 
+            if (services[selectedService].getRemainingCapacity() <= 0)
+            {
+                UserInterface.Message(String.Format("Selected service is at maximum capacity of {0} passangers", 
+                    services[selectedService].getPassangerCount()));
+            }
+
             if (!Airline.FIGHT_REGISTRY.addPassangerToFlight(customerList[selectedCustomer], selectedService))
             {
-                UserInterface.Message("Passanger failed to be added to service. Please ensure passanger is not booked already.");
+                UserInterface.Message("Passanger failed to be added to service. Please ensure " +
+                    "passanger is not booked already or service is full.");
             } else
             {
                 UserInterface.Message(String.Format("Customer {0} added to service. Total cost: ${1}",
@@ -158,11 +162,8 @@ namespace CAB201_Assignment_2022_S1
             return 0;
         }
 
-        private int RegisterHelicopter()
-        {
-            return 0;
-        }
-        private int RegisterLightAircraft()
+
+        private bool createFlight(int type)
         {
             string depaturePlace = "";
             while (depaturePlace.Length <= 0)
@@ -179,7 +180,7 @@ namespace CAB201_Assignment_2022_S1
             if (depaturePlace.ToLower() == arrivalPlace.ToLower())
             {
                 UserInterface.Message("Arrival and Destination cannot be the same. Try again.");
-                return 0;
+                return false;
             }
 
             string depatureTime = "";
@@ -208,17 +209,38 @@ namespace CAB201_Assignment_2022_S1
                     {
                         throw new Exception("Incorrect Distance value entered");
                     }
-                } catch {
+                }
+                catch
+                {
                     distance = "";
                     UserInterface.Message("Distance must be a number value greater than 0");
                 }
             }
 
-            LightAircraft flight = new LightAircraft(depaturePlace, arrivalPlace, depatureTime, distInt);
+            BaseAircraft flight;
+            if(type == 0)
+            {
+                flight = new LightAircraft(depaturePlace, arrivalPlace, depatureTime, distInt);
+            } else
+            {
+                flight = new Helicopter(depaturePlace, arrivalPlace, depatureTime, distInt);
+            }
+                
             Airline.FIGHT_REGISTRY.add(flight);
 
-            UserInterface.Message(String.Format("Light Aircraft from {0} to {1} added", depaturePlace, arrivalPlace));
+            UserInterface.Message(String.Format("{0} from {1} to {2} added", flight.getCraftType(), depaturePlace, arrivalPlace));
 
+            return true;
+        }
+
+        private int RegisterHelicopter()
+        {
+            createFlight(1);
+            return 0;
+        }
+        private int RegisterLightAircraft()
+        {
+            createFlight(0);
             return 0;
         }
 

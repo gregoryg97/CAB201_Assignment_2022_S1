@@ -9,9 +9,13 @@ namespace CAB201_Assignment_2022_S1
     internal abstract class BaseAircraft
     {
         protected int MAX_CAPACITY = 0;
+        protected int KM_PER_HOUR = 0;
+        protected int COST_PER_HOUR = 0;
+
         private string DepaturePlace;
         private string ArrivalPlace;
         private string DepatureTime;
+
         private int Distance;
         private List<Customer> Passangers = new List<Customer>();
 
@@ -56,9 +60,13 @@ namespace CAB201_Assignment_2022_S1
             return Distance;
         }
 
+        public int getRemainingCapacity()
+        {
+            return MAX_CAPACITY - getPassangerCount();
+        }
+
         public bool addPassanger(Customer val)
         {
-            // TODO add check
             if (Passangers.Count() >= MAX_CAPACITY)
             {
                 return false;
@@ -75,8 +83,25 @@ namespace CAB201_Assignment_2022_S1
             return list;
         }
 
-        public abstract int getFlyTime();
-        public abstract float getPassangerCost(int passangerCount);
+        protected virtual int additionalFlyMinutes()
+        {
+            return 0;
+        }
+
+        public virtual int getFlyTime()
+        {
+            if (getDistance() <= 0)
+            {
+                return 0;
+            }
+            float value = ((getDistance() / (float)KM_PER_HOUR) * 60);
+            return (int)(value + additionalFlyMinutes());
+        }
+        public virtual float getPassangerCost(int passangerCount)
+        {
+            float costPerMinute = COST_PER_HOUR / 60;
+            return costPerMinute * getFlyTime() * passangerCount;
+        }
 
         public abstract string getCraftType();
 

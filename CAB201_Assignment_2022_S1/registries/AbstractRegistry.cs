@@ -29,7 +29,20 @@ namespace CAB201_Assignment_2022_S1
             return true;
         }
         public abstract bool remove(T value);
-        protected abstract bool exists(T value);
+        protected virtual bool exists(T value)
+        {
+            T searchResult = this._registryStore.Find(delegate (T emp)
+            {
+                return emp.Equals(value);
+            });
+
+            if (searchResult == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
 
     }
 }

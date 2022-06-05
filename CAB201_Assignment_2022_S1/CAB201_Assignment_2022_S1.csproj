@@ -47,6 +47,7 @@
     <Compile Include="BookingMenu.cs" />
     <Compile Include="HomeMenu.cs" />
     <Compile Include="models\BaseAircraft.cs" />
+    <Compile Include="models\Helicopter.cs" />
     <Compile Include="models\LightAircraft.cs" />
     <Compile Include="registries\AbstractRegistry.cs" />
     <Compile Include="registries\CustomerRegistry.cs" />
@@ -54,7 +55,6 @@
     <Compile Include="models\Customer.cs" />
     <Compile Include="models\Employee.cs" />
     <Compile Include="models\Person.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="registries\FlightRegistry.cs" />
     <Compile Include="UserInterface.cs" />

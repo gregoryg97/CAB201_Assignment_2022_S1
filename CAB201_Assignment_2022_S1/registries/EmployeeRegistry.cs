@@ -15,21 +15,6 @@ namespace CAB201_Assignment_2022_S1
             this._registryStore = new List<Employee>();
         }
 
-        protected override bool exists(Employee value)
-        {
-            Employee searchResult = this._registryStore.Find(delegate (Employee emp)
-            {
-                return emp.getEmailAddress() == value.getEmailAddress();
-            });
-
-            if (searchResult == null)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         public override bool remove(Employee value)
         {
             throw new NotImplementedException();

@@ -23,6 +23,19 @@ namespace CAB201_Assignment_2022_S1
             this.emailAddress = emailAddress;
         }
 
+        public override bool Equals(object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Person p = (Person)obj;
+                return (name == p.getName()) && (emailAddress == p.getEmailAddress());
+            }
+        }
+
         public string getName()
         {
             return name;
@@ -32,5 +45,4 @@ namespace CAB201_Assignment_2022_S1
         {
             return emailAddress;
         }
-    };
-}
+    }}
