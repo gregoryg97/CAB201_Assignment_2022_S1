@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace CAB201_Assignment_2022_S1
 {
+    /// <summary>
+    /// Class which defines the base identification details of a Person
+    /// </summary>
     internal class Person
     {
+        /// <summary>
+        /// Unique Name of Person
+        /// </summary>
         private string name;
+
+        /// <summary>
+        /// Unique email address of Person
+        /// </summary>
         private string emailAddress;
 
         public Person(Person person)
@@ -36,11 +46,13 @@ namespace CAB201_Assignment_2022_S1
             }
         }
 
+        /// <returns>Return name of Person</returns>
         public string getName()
         {
             return name;
         }
 
+        /// <returns>Return email address of person</returns>
         public string getEmailAddress()
         {
             return emailAddress;

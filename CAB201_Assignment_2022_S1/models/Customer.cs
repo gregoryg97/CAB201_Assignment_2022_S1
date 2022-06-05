@@ -6,9 +6,18 @@ using System.Threading.Tasks;
 
 namespace CAB201_Assignment_2022_S1
 {
+    /// <summary>
+    /// Class defining the specific details of a customer for the purposes of booking
+    /// </summary>
     internal class Customer : Person
     {
+        /// <summary>
+        /// Billing address
+        /// </summary>
         private string address;
+        /// <summary>
+        /// Mobile contact number
+        /// </summary>
         private string mobile;
 
         public Customer(Person person, string address, string mobile) : base(person) {
@@ -22,11 +31,13 @@ namespace CAB201_Assignment_2022_S1
             this.mobile = mobile;
         }
 
+        /// <returns>Returrn customer billing address</returns>
         public string getAddress()
         {
             return address;
         }
 
+        /// <returns>Return customer primary contact number</returns>
         public string getMobile()
         {
             return mobile;

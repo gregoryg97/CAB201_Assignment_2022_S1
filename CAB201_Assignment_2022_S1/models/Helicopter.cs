@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CAB201_Assignment_2022_S1
 {
+    /// <summary>
+    /// Class which defines a Helicopter for the purposes of booking services
+    /// </summary>
     internal class Helicopter : BaseAircraft
     {
         public Helicopter(string depaturePlace, string arrivalPlace, string depatureTime, int distance)
