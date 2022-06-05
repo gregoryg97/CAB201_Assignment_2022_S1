@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace CAB201_Assignment_2022_S1
 {
+    /// <summary>
+    /// Airline Booking Program which implements all 16 User Stories defined by Assesment Outline
+    /// 
+    /// Contains core DAO objects for Employee, Customer and Flight Data.
+    /// While initalising the entry point meny for User Interaction
+    /// </summary>
     internal class Airline
     {
         public static EmployeeRegistry EMPLOYEE_REGISTRY = new EmployeeRegistry();

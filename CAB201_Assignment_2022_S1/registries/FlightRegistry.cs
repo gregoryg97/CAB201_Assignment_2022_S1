@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CAB201_Assignment_2022_S1
 {
+    /// <summary>
+    /// Class which handles the storage and validation of flights alongside passangers on each service
+    /// </summary>
     internal class FlightRegistry : Registry<BaseAircraft>
     {
         public FlightRegistry()
@@ -35,6 +38,12 @@ namespace CAB201_Assignment_2022_S1
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Adds passanger to defined service. Returning true if MAC succeeds
+        /// </summary>
+        /// <param name="passanger">Passanger to be added to service</param>
+        /// <param name="serviceIdx">Index of service from getAll list<T> data</param>
+        /// <returns>Entry success bool</returns>
         public bool addPassangerToFlight(Customer passanger, int serviceIdx)
         {
             if (serviceIdx < 0 || serviceIdx >= this._registryStore.Count())

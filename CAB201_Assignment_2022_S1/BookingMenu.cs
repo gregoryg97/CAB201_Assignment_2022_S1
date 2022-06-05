@@ -5,6 +5,11 @@ using System.Globalization;
 
 namespace CAB201_Assignment_2022_S1
 {
+    /// <summary>
+    /// Class which represents the core Booking Menu structure of the Airline Program
+    /// This handles all User Interface prompts and input error handling.
+    /// While interacting the with AirlineProgram registry objects for Data Access
+    /// </summary>
     internal class BookingMenu : Menu
     {
         public BookingMenu(string title, params MenuItem[] menuItems) : base(title, menuItems)
@@ -34,12 +39,22 @@ namespace CAB201_Assignment_2022_S1
             Add(logout);
         }
 
+        /// <summary>
+        /// Exits user from menu and terminates application.
+        /// </summary>
+        /// <returns>-1 Int value to terminate interface</returns>
         private int Logout()
         {
             // TODO put text here and remove active employee from registry
             return -1;
         }
 
+        /// <summary>
+        /// Presents the user with a list of services and requests the user to select the service
+        /// which they wish to view currently booked passangers for.
+        /// 
+        /// This will present a message if no services are avaiable or no passangers booked for selected service.
+        /// </summary>
         private int ViewFlightPassangers()
         {
             List<BaseAircraft> services = Airline.FIGHT_REGISTRY.getAll();
@@ -73,6 +88,11 @@ namespace CAB201_Assignment_2022_S1
             return 0;
         }
 
+        /// <summary>
+        /// Requests the user to select pre-exisiting customer & pre-exisiting service for the 
+        /// customer to be booked on. If the service is full or no-services exist the UI will display 
+        /// the relevant message.
+        /// </summary>
         private int AddCustomerToService()
         {
             List<Customer> customerList = Airline.CUSTOMER_REGISTRY.getAll();
@@ -126,6 +146,10 @@ namespace CAB201_Assignment_2022_S1
             return 0;
         }
 
+        /// <summary>
+        /// Display flight time for all services in minutes.
+        /// This will show aircraft type, depature location, destination and fly time in minutes
+        /// </summary>
         private int ViewFlyingTimes()
         {
             List<BaseAircraft> services = Airline.FIGHT_REGISTRY.getAll();
@@ -144,6 +168,9 @@ namespace CAB201_Assignment_2022_S1
             return 0;
         }
 
+        /// <summary>
+        /// Display all available services and their associated travel distance
+        /// </summary>
         private int ViewFlyingServices()
         {
             List<BaseAircraft> services = Airline.FIGHT_REGISTRY.getAll();
@@ -162,7 +189,11 @@ namespace CAB201_Assignment_2022_S1
             return 0;
         }
 
-
+        /// <summary>
+        /// Creates new flight services by prompting user for details and entering this into the Registry
+        /// </summary>
+        /// <param name="type">Int value 0 for Light Aircraft & 1 for Helicopter</param>
+        /// <returns></returns>
         private bool createFlight(int type)
         {
             string depaturePlace = "";
@@ -233,17 +264,27 @@ namespace CAB201_Assignment_2022_S1
             return true;
         }
 
+        /// <summary>
+        /// MenuItem prompt for user to create new Helicopter Service
+        /// </summary>
         private int RegisterHelicopter()
         {
             createFlight(1);
             return 0;
         }
+
+        /// <summary>
+        /// MenuItem prompt for ruser to create new Light Aircraft Service
+        /// </summary>
         private int RegisterLightAircraft()
         {
             createFlight(0);
             return 0;
         }
 
+        /// <summary>
+        /// MenuItem prompt for user to enter a new customer for booking into flight services
+        /// </summary>
         private int RegisterCustomer()
         {
             Person person = Utils.promptPersonCreation();

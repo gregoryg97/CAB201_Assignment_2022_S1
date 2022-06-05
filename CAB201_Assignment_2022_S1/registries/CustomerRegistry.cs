@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CAB201_Assignment_2022_S1
 {
+    /// <summary>
+    /// Class which handles the storage and validation of Customer Data
+    /// </summary>
     internal class CustomerRegistry : Registry<Customer>
     {
         public CustomerRegistry()

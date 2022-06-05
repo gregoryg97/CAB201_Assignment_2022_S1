@@ -8,6 +8,9 @@ using CAB201_UserInterfaceTest;
 
 namespace CAB201_Assignment_2022_S1
 {
+    /// <summary>
+    /// Class which defines a MenuItem prompt within each menu class.
+    /// </summary>
     public class CallableItem : MenuItem
     {
         public Action ActionMethod;
@@ -30,8 +33,16 @@ namespace CAB201_Assignment_2022_S1
         public delegate int Action();
     }
 
+    /// <summary>
+    /// Class of Helper methods that can be used throughout the entire application
+    /// </summary>
     class Utils
     {
+        /// <summary>
+        /// Checks if an input string is a valid email address
+        /// </summary>
+        /// <param name="value">String containing input email address</param>
+        /// <returns>Bool if email address is valid</returns>
         public static bool isValidEmailAddress(string value)
         {
             var trimmedEmail = value.Trim();
@@ -51,6 +62,9 @@ namespace CAB201_Assignment_2022_S1
             }
         }
 
+        /// <summary>
+        /// General person creation prompt used across application
+        /// </summary>
         public static Person promptPersonCreation()
         {
             string name = "";
